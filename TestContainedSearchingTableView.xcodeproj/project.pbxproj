@@ -22,6 +22,8 @@
 		D4A7EAB5190C94260001E279 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A7EA94190C94260001E279 /* UIKit.framework */; };
 		D4A7EABD190C94260001E279 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4A7EABB190C94260001E279 /* InfoPlist.strings */; };
 		D4A7EABF190C94260001E279 /* TestContainedSearchingTableViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7EABE190C94260001E279 /* TestContainedSearchingTableViewTests.m */; };
+		D4A7EACA190C9B4A0001E279 /* BRNContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7EAC9190C9B4A0001E279 /* BRNContainerViewController.m */; };
+		D4A7EAD0190D065F0001E279 /* BRNParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7EACF190D065F0001E279 /* BRNParentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,10 @@
 		D4A7EABA190C94260001E279 /* TestContainedSearchingTableViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TestContainedSearchingTableViewTests-Info.plist"; sourceTree = "<group>"; };
 		D4A7EABC190C94260001E279 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4A7EABE190C94260001E279 /* TestContainedSearchingTableViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestContainedSearchingTableViewTests.m; sourceTree = "<group>"; };
+		D4A7EAC8190C9B4A0001E279 /* BRNContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRNContainerViewController.h; sourceTree = "<group>"; };
+		D4A7EAC9190C9B4A0001E279 /* BRNContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRNContainerViewController.m; sourceTree = "<group>"; };
+		D4A7EACE190D065F0001E279 /* BRNParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRNParentViewController.h; sourceTree = "<group>"; };
+		D4A7EACF190D065F0001E279 /* BRNParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRNParentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,10 @@
 				D4A7EA9F190C94260001E279 /* BRNAppDelegate.h */,
 				D4A7EAA0190C94260001E279 /* BRNAppDelegate.m */,
 				D4A7EAA2190C94260001E279 /* Main.storyboard */,
+				D4A7EAC8190C9B4A0001E279 /* BRNContainerViewController.h */,
+				D4A7EACE190D065F0001E279 /* BRNParentViewController.h */,
+				D4A7EACF190D065F0001E279 /* BRNParentViewController.m */,
+				D4A7EAC9190C9B4A0001E279 /* BRNContainerViewController.m */,
 				D4A7EAA5190C94260001E279 /* BRNMasterViewController.h */,
 				D4A7EAA6190C94260001E279 /* BRNMasterViewController.m */,
 				D4A7EAA8190C94260001E279 /* BRNDetailViewController.h */,
@@ -256,6 +266,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4A7EAAA190C94260001E279 /* BRNDetailViewController.m in Sources */,
+				D4A7EAD0190D065F0001E279 /* BRNParentViewController.m in Sources */,
+				D4A7EACA190C9B4A0001E279 /* BRNContainerViewController.m in Sources */,
 				D4A7EAA7190C94260001E279 /* BRNMasterViewController.m in Sources */,
 				D4A7EA9D190C94260001E279 /* main.m in Sources */,
 				D4A7EAA1190C94260001E279 /* BRNAppDelegate.m in Sources */,
