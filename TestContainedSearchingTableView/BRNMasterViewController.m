@@ -10,104 +10,71 @@
 
 #import "BRNDetailViewController.h"
 
-@interface BRNMasterViewController () {
-    NSMutableArray *_objects;
-}
+@interface BRNMasterViewController ()
+
+@property (nonatomic, strong) NSArray *objects;
+@property (nonatomic, strong) NSArray *searchObjects;
+
 @end
 
 @implementation BRNMasterViewController
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)insertNewObject:(id)sender
-{
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
+- (NSArray *)objectsForTableView:(UITableView *)tableView {
+    NSArray *result = nil;
+    if (tableView == self.tableView) {
+        result = self.objects;
+    } else if (tableView == self.searchDisplayController.searchResultsTableView) {
+        result = self.searchObjects;
     }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    return result;
 }
 
 #pragma mark - Table View
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _objects.count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [[self objectsForTableView:tableView] count];
+    
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = _objects[indexPath.row];
+    NSObject *object = [[self objectsForTableView:tableView] objectAtIndex:indexPath.item];
     cell.textLabel.text = [object description];
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UITableView *tableView;
+    if (self.searchDisplayController.isActive) {
+        tableView = self.searchDisplayController.searchResultsTableView;
+    } else {
+        tableView = self.tableView;
+    }
+    NSIndexPath *selectedRow = [tableView indexPathForSelectedRow];
+    NSObject *object = [[self objectsForTableView:tableView] objectAtIndex:selectedRow.item];
+    BRNDetailViewController *detailViewController = segue.destinationViewController;
+    if ([detailViewController isKindOfClass:[BRNDetailViewController class]]) {
+        [detailViewController setDetailItem:object];
     }
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
+- (NSArray *)objects {
+    if (!_objects) {
+        _objects = @[@"A", @"B", @"C"];
     }
+    return _objects;
+}
+
+-(NSArray *)searchObjects {
+    if (!_searchObjects) {
+        _searchObjects = @[@"1", @"2", @"3"];
+    }
+    return _searchObjects;
 }
 
 @end
